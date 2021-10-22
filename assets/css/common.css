@@ -1,0 +1,31 @@
+body{
+    margin:1% 12%;
+}
+
+.red_headings{
+    margin-top:2%;
+    color:red;
+    font-weight: bolder;
+    padding-left: 1%;
+}
+.red_bold_line{
+    border-bottom:2px solid red;
+    margin: 2% 0% 2% 0%;
+}
+
+.black_bold{
+    font-weight: bolder;
+}
+
+.floatRight{
+    float: right;
+}
+
+.floatLeft{
+    float: left;
+}
+
+.disable{
+pointer-events:none;
+background:grey;
+}
