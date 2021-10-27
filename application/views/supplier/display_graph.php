@@ -3,13 +3,16 @@
 <script src="https://code.highcharts.com/modules/data.js"></script>
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
 <script src="https://code.highcharts.com/modules/accessibility.js"></script> -->
-<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script> -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script> -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script> -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
 
 <!-- <script src="https://unpkg.com/jspdf@latest/dist/jspdf.umd.min.js"></script> -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.debug.js"></script> -->
+
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.debug.js"></script>
 <style>
     .Charts {
         width: 100%;
@@ -19,7 +22,6 @@
 
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-        <!-- <input type="hidden" id="hidden_supplier_count" value="0" /> -->
         <div class="row">
             <div class="col-lg-12">
                 <h1>Suppliers</h1>
@@ -53,15 +55,17 @@
         <div class="row">
             <div class="col-lg-12">
 
-                <button class="btn btn-primary" id="btnPrint" onclick="PrintElem()" >Export To PDF</button>
+                <button class="btn btn-primary" id="btnPrint" >Export To PDF</button>
             </div>
         </div>
-        <div class="row" id="contnet">
+        <div class="row" id="graph_content">
+
             <?php foreach ($materials as $key => $value) {?>
+                <?php if(isset($value['graph_data']) && !empty($value['graph_data'])){ ?>
 
-                <div id="<?= 'chartContainer'.$value['material_id']; ?>" style="height: 200px; width: 100%;margin-top:3%;"></div>
+                        <div id="<?= 'chartContainer'.$value['id']; ?>" style="height: 200px; width: 100%;margin-top:3%;"></div>
 
-            <?php } ?>
+            <?php } } ?>
 
         </div>
     </div>
@@ -70,19 +74,20 @@
 
 window.onload = function () {
     <?php foreach ($materials as $key => $value) {?>
-        var chart = new CanvasJS.Chart("<?= 'chartContainer'.$value['material_id'] ?>", {
+        var chart = new CanvasJS.Chart("<?= 'chartContainer'.$value['id'] ?>", {
     		title:{
-    			text: "<?= 'material '.$value['material_id'] ?>"
+    			text: "<?= $value['material_name'] ?>"
     		},
     		data: [
     		{
     			// Change type to "doughnut", "line", "splineArea", etc.
     			type: "column",
     			dataPoints: [
-                    <?php foreach ($value['supplier_data'] as $key1 => $supplier) {?>
-                        <?php if($supplier['count'] > 0){ ?>
-                        { label: "<?=$supplier['supplier_name'] ?>",  y: <?=$supplier['count'] ?>  },
-                    <?php } } ?>
+                    <?php if(isset($value['graph_data']) && !empty($value['graph_data'])){ ?>
+                    <?php foreach ($value['graph_data'] as $key1 => $supplier) {?>
+                        <?php if($supplier['count_of_rows'] > 0){ ?>
+                        { label: "<?=$supplier['name'] ?>",  y: <?=$supplier['count_of_rows'] ?>  },
+                    <?php } } } ?>
     				// { label: "grey", y: 15  },
     				// { label: "grey", y: 25  },
     				// { label: "grey",  y: 30  },
@@ -121,15 +126,34 @@ window.onload = function () {
 }
 $('#btnPrint').on('click', function(event) {
         event.preventDefault();
-        html2canvas($('#contnet'), {
+        html2canvas($('#graph_content'), {
             onrendered: function(canvas) {
-                var imgData = canvas.toDataURL('image/jpeg');
+                // var imgData = canvas.toDataURL('image/jpeg');
+                var imgData = canvas.toDataURL();
                 var doc = new jsPDF('landscape');
-                doc.addImage(imgData, 'JPEG', 15, 45, 270, 125);
-                doc.save('download.pdf');
+                // const doc = new jsPDF("l", "mm", "a0"); //  use a4 for smaller page
+
+                // doc.addImage(imgData, 'JPEG', 15, 45, 270, 125);
+                doc.addImage(imgData, 'JPEG', 10, 20, 270, 125);
+                doc.save('grapgh.pdf');
                 return false;
             }
         });
+
+        // debugger;
+        // var doc = new jsPDF();  //create jsPDF object
+        //  doc.fromHTML(document.getElementById("graph_content"), // page element which you want to print as PDF
+        //  15,
+        //  15,
+        //  {
+        //    'width': 170  //set width
+        //  },
+        //  function(a)
+        //   {
+        //    doc.save("HTML2PDF.pdf"); // save file name as HTML2PDF.pdf
+        //  });
+
+
     });
 
 </script>
