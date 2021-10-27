@@ -22,19 +22,19 @@
         <!-- <input type="hidden" id="hidden_supplier_count" value="0" /> -->
         <div class="row">
             <div class="col-lg-12">
-                <h1>Suppliers</h1>
+                <h1>Guia de Fornecedores</h1>
             </div>
         </div>
 
         <div class="row">
             <div class="col-lg-12">
-                <label>List of most used suppliers in your region</label>
+                <label>Conheça os fornecedores mais utilizados na sua região</label>
             </div>
         </div>
 
         <div class="row">
             <div class="col-lg-12 ">
-                <label class="red_headings">Filtering by region</label>
+                <label class="red_headings">Filtrando por região</label>
                 <hr class="red_bold_line">
             </div>
         </div>

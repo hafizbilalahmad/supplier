@@ -5,19 +5,19 @@
 
         <div class="row">
             <div class="col-lg-12">
-                <h1>Suppliers</h1>
+                <h1>Guia de Fornecedores</h1>
             </div>
         </div>
 
         <div class="row">
             <div class="col-lg-12">
-                <label>List of most used suppliers in your region</label>
+                <label>Conheça os fornecedores mais utilizados na sua região</label>
             </div>
         </div>
 
         <div class="row">
             <div class="col-lg-12 ">
-                <label class="red_headings">Understanding your company</label>
+                <label class="red_headings">Informações sobre a sua empresa:</label>
                 <hr class="red_bold_line">
             </div>
         </div>
@@ -26,7 +26,7 @@
 
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-6">
-                    <p class="black_bold">How many employees <br> does your company have <br> in the adminitrative area?</p>
+                    <p class="black_bold">Quantos funcionários há na sua empresa <br>nas áreas de Engenharia, Compras, Financeiro, <br>Administrativo e Comercial?</p>
                     <input type="number" id="num_of_employess" name="num_of_employess" class="form-control col-sm-6" value="1">
                     <div id="num_of_employess_validation" hidden>
                         <br>
@@ -34,7 +34,7 @@
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
-                    <p class="black_bold">How big do you think <br> your company is?</p>
+                    <p class="black_bold">Qual é o porte da sua empresa?</p>
 
                     <label class="radio-inline"><input type="radio" name="company_status" value="pequena" checked> Pequena &nbsp&nbsp</label>
                     <label class="radio-inline"><input type="radio" name="company_status" value="media"> Media &nbsp&nbsp</label>
@@ -45,39 +45,37 @@
 
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-6">
-                    <p class="black_bold">Does your company use <br>seperate spreadsheets by<br>area or does it already have<br>
-                        a management system?
-                    </p>
+                    <p class="black_bold">Sua empresa usa planilhas separadas por<br>área ou já possui um sistema de gestão?</p>
                     <label class="radio-inline"><input type="radio" name="company_system" value="planilhas" checked> Planilhas &nbsp&nbsp</label>
                     <label class="radio-inline"><input type="radio" name="company_system" value="sistema_integrado"> Sistema integrado &nbsp&nbsp</label>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
-                    <p class="black_bold">Which segment of your <br>company?</p>
+                    <p class="black_bold">Qual é o segmento da sua empresa?</p>
                     <select class="form-control col-sm-8" name="segment" id="company_segment">
-                        <option value="" disabled selected> Select Segment </option>
+                        <option value="" disabled selected> Selecionar Segmento </option>
                         <?php foreach ($segments as $key => $segment) {  ?>
                             <option value="<?=$segment['segment_key']?>"> <?=$segment['segment_name']?></option>
                         <?php } ?>
                     </select>
                     <div id="company_segment_validation" hidden>
                         <br>
-                        <label style="color:red;"> Please select segment </label>
+                        <label style="color:red;"> Selecione um segmento </label>
                     </div>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-lg-12 ">
-                    <label class="red_headings">Filtering by region</label>
+                    <label class="red_headings">Selecione o seu estado:</label>
                     <hr class="red_bold_line">
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-lg-12 ">
-                    <p class="black_bold">What's your state</p>
+                    <p class="black_bold">Estado</p>
                     <select class="form-control col-sm-4" name="state" id="company_state">
-                        <option value="" disabled selected> Select State </option>
+                        <option value="" disabled selected> Selecionar Estado </option>
                         <?php foreach ($states as $key => $state) {  ?>
                             <option value="<?=$state['id']?>"> <?=$state['state_name']?> </option>
                         <?php } ?>
@@ -85,11 +83,11 @@
 
                     <div id="company_state_validation" hidden>
                         <br>
-                        <label style="color:red;"> Please select state </label>
+                        <label style="color:red;"> Selecione o Estado </label>
                     </div>
                 </div><br><br>
                 <div class="col-lg-12 ">
-                    <input type="button" value="Advance" onclick="validate_and_submit()" id="add_potiental_information_button" class="btn btn-success floatRight" >
+                    <input type="button" value="Avançar" onclick="validate_and_submit()" id="add_potiental_information_button" class="btn btn-success floatRight" >
                 </div>
 
             </div>
