@@ -63,5 +63,45 @@ class Supplier_model extends CI_Model
             $result = $this->db->query($sql)->result_array();
             return $result;
         }
+    public function get_graph_data($state_id, $material_ids){
+        // mat.material_name is deleted
 
+        $sql = "SELECT
+                    COUNT(*) as count_of_rows,
+                    sm.supplier_id,
+                    sup.name,
+                    sm.material_id
+                FROM
+                    `supplier_material` sm
+                    JOIN suppliers sup ON (sup.id = sm.supplier_id)
+                    JOIN materials mat ON (mat.id = sm.material_id)
+                WHERE
+                    sm.state_id = ".$state_id."
+                    AND
+                    sm.material_id IN (".$material_ids.")
+                GROUP BY
+                    sm.supplier_id
+                ORDER BY
+                    sm.material_id ASC";
+        $result = $this->db->query($sql)->result_array();
+        return $result;
+    }
+
+    public function get_value_wherein($table, $column, $where, $order_by='')
+    {
+        if ($order_by !=='') {
+            $this->db->order_by($order_by, 'desc');
+        }
+        return $this->db->from($table)->where_in($column, $where)->get()->result_array();
+    }
+
+    public function get_value_where_and_wherein($table, $where, $colunm, $where_in ,$order_by = '')
+    {
+        $this->db->select('*');
+        $this->db->from($table);
+        $this->db->order_by($order_by, 'desc');
+        $this->db->where_in($colunm, $where_in);
+        $this->db->where($where);
+        return $this->db->get()->result_array();
+    }
 }

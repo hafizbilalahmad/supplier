@@ -44,8 +44,8 @@
                     <hr class="red_bold_line">
                 </div>
             </div>
-			
-			
+
+
             <div class="row" id="supplier_row">
                 <?php foreach ($materials as $key => $material) {?>
                     <div class="col-lg-4 col-md-4 col-sm-4" style="margin-bottom:2%;">
