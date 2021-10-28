@@ -30,7 +30,7 @@
                     <input type="number" id="num_of_employess" name="num_of_employess" class="form-control col-sm-6" value="1">
                     <div id="num_of_employess_validation" hidden>
                         <br>
-                        <label style="color:red;"> Please enter valid number of employees </label>
+                        <label style="color:red;"> Por favor, insira um número válido de funcionários </label>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">

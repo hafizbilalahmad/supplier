@@ -51,10 +51,12 @@
                     <div class="col-lg-4 col-md-4 col-sm-4" style="margin-bottom:2%;">
                         <label class="black_bold"> <?=$material['material_name'] ?></label>
                         <select class="form-control col-10 supplier_class[]" name="<?= 'suppliers['.$material['id'].']' ?>">
-                            <option value="" selected>Fornecedor</option>
-                        <?php foreach ($suppliers as $key => $supplier): ?>
+                            <option value="" selected><?=$material['material_name'] ?> Fornecedor</option>
+                            <?php if(isset($material['suppliers'])) {?>
+                        <?php foreach ($material['suppliers'] as $supplier_key => $supplier): ?>
                                 <option value="<?= $supplier['id'] ?>"> <?= $supplier['name'] ?> </option>
                         <?php endforeach; ?>
+                    <?php } ?>
                         </select>
                         <br>
                         <input type="text" name="<?='other_unlisted['.$material['id'].']'?>" class="form-control col-10 other_unlisted" value="" placeholder="another unlisted">
@@ -101,10 +103,6 @@
         var button = document.getElementById('add_state_material_supplier_btn');
         button.form.submit();
     }
-    // $('#add_supplier_form').submit(function(e) {
-    //     $(':disabled').each(function(e) {
-    //         $(this).removeAttr('disabled');
-    //     })
-    // });
+
 
 </script>
