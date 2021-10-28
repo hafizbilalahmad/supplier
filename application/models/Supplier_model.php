@@ -63,6 +63,13 @@ class Supplier_model extends CI_Model
             $result = $this->db->query($sql)->result_array();
             return $result;
         }
+
+        public function SQL_MODE_FULL_GROUP_BY_QUERY(){
+            $sql = "SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''));";
+            $result = $this->db->query($sql);
+            // return $result;
+        }
+
     public function get_graph_data($state_id, $material_ids){
         // mat.material_name is deleted
 

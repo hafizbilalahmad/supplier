@@ -108,6 +108,8 @@ class Supplier extends MyController {
         //getting only those materials which was selected on previous page
         $materials = $this->supplier_model->get_value_where_and_wherein('materials',['is_deleted' => 0],'id',$materials_material_ids);
 
+        //this is for sql group by issue, we have to run this query before we run below get_graph_data 
+        $sql_group_by_issue = $this->supplier_model->SQL_MODE_FULL_GROUP_BY_QUERY();
         //all grapgh data filter by state and material id and group by suppliers
         $graph_data = $this->supplier_model->get_graph_data($state_id,$graph_material_ids);
         $graph_data = set_subarray_multiple_index_by_coulnm_value($graph_data,'material_id');
