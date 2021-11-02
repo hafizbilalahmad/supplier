@@ -11,6 +11,8 @@ class Supplier extends MyController {
     }
 
     public function index(){
+        // $data["language_msg"] = ;
+        // show($data);
         $segments = $this->supplier_model->get_selected_value('id,segment_name,segment_key','segments',['is_deleted' => 0]);
         $states = $this->supplier_model->get_selected_value('id,state_name,state_key','states',['is_deleted' => 0]);
         // show($states);
@@ -126,6 +128,7 @@ class Supplier extends MyController {
         $states = $this->supplier_model->get_selected_value('id,state_name,state_key','states',['is_deleted' => 0]);
         $data['states'] = $states;
 
+<<<<<<< Updated upstream
         $suppliers = $this->supplier_model->get_selected_value('id,name','suppliers',['is_deleted' => 0]);
         // show($my_material_ids);
         $ret = [];
@@ -135,6 +138,21 @@ class Supplier extends MyController {
                 $ret[$key1]['supplier_data'][$key]['supplier_id'] = $supplier['id'];
                 $ret[$key1]['supplier_data'][$key]['supplier_name'] = $supplier['name'];
                 $ret[$key1]['supplier_data'][$key]['count'] = $this->supplier_model->get_count('supplier_material',['state_id' => $state_id,'supplier_id'=>$supplier['id'],'material_id'=>$material]);
+=======
+        //getting only those materials which was selected on previous page
+        $materials = $this->supplier_model->get_value_where_and_wherein('materials',['is_deleted' => 0],'id',$materials_material_ids);
+
+        //this is for sql group by issue, we have to run this query before we run below get_graph_data
+        $sql_group_by_issue = $this->supplier_model->SQL_MODE_FULL_GROUP_BY_QUERY();
+        //all grapgh data filter by state and material id and group by suppliers
+        $graph_data = $this->supplier_model->get_graph_data($state_id,$graph_material_ids);
+        $graph_data = set_subarray_multiple_index_by_coulnm_value($graph_data,'material_id');
+
+        //combining grapgh data with each respective material
+        foreach ($materials as $key => $material) {
+            if(isset($graph_data[$material['id']])){
+                $materials[$key]['graph_data'] = $graph_data[$material['id']];
+>>>>>>> Stashed changes
             }
 
         }

@@ -1,23 +1,34 @@
-<?php $this->load->view('common/header.php'); ?>
+<?php $this->load->view('common/header.php');?>
 
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-12">
 
         <div class="row">
-            <div class="col-lg-12">
-                <h1>Guia de Fornecedores</h1>
+            <div class="col-lg-10">
+                <!-- <h1>Guia de Fornecedores</h1> -->
+                <label>Select Language</label>
+            </div>
+            <div class="col-lg-10">
+                <a href="<?= base_url('myController/change_language/english'); ?>">English</a>
+                <a href="<?= base_url('myController/change_language/portuguese'); ?>">Portuguese</a>
             </div>
         </div>
 
         <div class="row">
             <div class="col-lg-12">
-                <label>Conheça os fornecedores mais utilizados na sua região</label>
+                <h1><?=$this->lang->line("msg_main_heading")?></h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <label><?=$this->lang->line("msg_label_under_main_heading")?></label>
             </div>
         </div>
 
         <div class="row">
             <div class="col-lg-12 ">
-                <label class="red_headings">Informações sobre a sua empresa:</label>
+                <label class="red_headings"><?=$this->lang->line("msg_info_company")?></label>
                 <hr class="red_bold_line">
             </div>
         </div>
@@ -26,56 +37,60 @@
 
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-6">
-                    <p class="black_bold">Quantos funcionários há na sua empresa <br>nas áreas de Engenharia, Compras, Financeiro, <br>Administrativo e Comercial?</p>
+                    <p class="black_bold"><?=$this->lang->line("msg_number_of_employees")?></p>
                     <input type="number" id="num_of_employess" name="num_of_employess" class="form-control col-sm-6" value="1">
                     <div id="num_of_employess_validation" hidden>
                         <br>
+<<<<<<< Updated upstream
                         <label style="color:red;"> Please enter valid number of employees </label>
+=======
+                        <label style="color:red;"> <?=$this->lang->line("msg_number_of_employees_error")?> </label>
+>>>>>>> Stashed changes
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
-                    <p class="black_bold">Qual é o porte da sua empresa?</p>
+                    <p class="black_bold"><?=$this->lang->line("msg_company_status")?></p>
 
-                    <label class="radio-inline"><input type="radio" name="company_status" value="pequena" checked> Pequena &nbsp&nbsp</label>
-                    <label class="radio-inline"><input type="radio" name="company_status" value="media"> Media &nbsp&nbsp</label>
-                    <label class="radio-inline"><input type="radio" name="company_status" value="grande"> Grande &nbsp&nbsp</label>
+                    <label class="radio-inline"><input type="radio" name="company_status" value="pequena" checked> <?=$this->lang->line("msg_company_status_small")?> &nbsp&nbsp</label>
+                    <label class="radio-inline"><input type="radio" name="company_status" value="media"> <?=$this->lang->line("msg_company_status_average")?> &nbsp&nbsp</label>
+                    <label class="radio-inline"><input type="radio" name="company_status" value="grande"> <?=$this->lang->line("msg_company_status_great")?> &nbsp&nbsp</label>
 
                 </div>
             </div><br><br>
 
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-6">
-                    <p class="black_bold">Sua empresa usa planilhas separadas por<br>área ou já possui um sistema de gestão?</p>
-                    <label class="radio-inline"><input type="radio" name="company_system" value="planilhas" checked> Planilhas &nbsp&nbsp</label>
-                    <label class="radio-inline"><input type="radio" name="company_system" value="sistema_integrado"> Sistema integrado &nbsp&nbsp</label>
+                    <p class="black_bold"><?=$this->lang->line("msg_company_management")?></p>
+                    <label class="radio-inline"><input type="radio" name="company_system" value="planilhas" checked> <?=$this->lang->line("msg_company_management_spreadsheet")?> &nbsp&nbsp</label>
+                    <label class="radio-inline"><input type="radio" name="company_system" value="sistema_integrado"> <?=$this->lang->line("msg_company_management_integrated")?> &nbsp&nbsp</label>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
-                    <p class="black_bold">Qual é o segmento da sua empresa?</p>
+                    <p class="black_bold"><?=$this->lang->line("msg_company_segment")?></p>
                     <select class="form-control col-sm-8" name="segment" id="company_segment">
-                        <option value="" disabled selected> Selecionar Segmento </option>
+                        <option value="" disabled selected> <?=$this->lang->line("msg_select_segment")?> </option>
                         <?php foreach ($segments as $key => $segment) {  ?>
                             <option value="<?=$segment['segment_key']?>"> <?=$segment['segment_name']?></option>
                         <?php } ?>
                     </select>
                     <div id="company_segment_validation" hidden>
                         <br>
-                        <label style="color:red;"> Selecione um segmento </label>
+                        <label style="color:red;"> <?=$this->lang->line("msg_company_segment_error")?> </label>
                     </div>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-lg-12 ">
-                    <label class="red_headings">Selecione o seu estado:</label>
+                    <label class="red_headings"><?=$this->lang->line("msg_state_select")?></label>
                     <hr class="red_bold_line">
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-lg-12 ">
-                    <p class="black_bold">Estado</p>
+                    <p class="black_bold"><?=$this->lang->line("msg_state")?></p>
                     <select class="form-control col-sm-4" name="state" id="company_state">
-                        <option value="" disabled selected> Selecionar Estado </option>
+                        <option value="" disabled selected> <?=$this->lang->line("msg_select_state")?> </option>
                         <?php foreach ($states as $key => $state) {  ?>
                             <option value="<?=$state['id']?>"> <?=$state['state_name']?> </option>
                         <?php } ?>
@@ -83,11 +98,11 @@
 
                     <div id="company_state_validation" hidden>
                         <br>
-                        <label style="color:red;"> Selecione o Estado </label>
+                        <label style="color:red;"> <?=$this->lang->line("msg_state_select_error")?> </label>
                     </div>
                 </div><br><br>
                 <div class="col-lg-12 ">
-                    <input type="button" value="Avançar" onclick="validate_and_submit()" id="add_potiental_information_button" class="btn btn-success floatRight" >
+                    <input type="button" value="<?=$this->lang->line("msg_advance_button")?>" onclick="validate_and_submit()" id="add_potiental_information_button" class="btn btn-success floatRight" >
                 </div>
 
             </div>
