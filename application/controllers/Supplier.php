@@ -128,17 +128,6 @@ class Supplier extends MyController {
         $states = $this->supplier_model->get_selected_value('id,state_name,state_key','states',['is_deleted' => 0]);
         $data['states'] = $states;
 
-<<<<<<< Updated upstream
-        $suppliers = $this->supplier_model->get_selected_value('id,name','suppliers',['is_deleted' => 0]);
-        // show($my_material_ids);
-        $ret = [];
-        foreach ($my_material_ids as $key1 => $material) {
-            $ret[$key1]['material_id'] = $material;
-            foreach ($suppliers as $key => $supplier) {
-                $ret[$key1]['supplier_data'][$key]['supplier_id'] = $supplier['id'];
-                $ret[$key1]['supplier_data'][$key]['supplier_name'] = $supplier['name'];
-                $ret[$key1]['supplier_data'][$key]['count'] = $this->supplier_model->get_count('supplier_material',['state_id' => $state_id,'supplier_id'=>$supplier['id'],'material_id'=>$material]);
-=======
         //getting only those materials which was selected on previous page
         $materials = $this->supplier_model->get_value_where_and_wherein('materials',['is_deleted' => 0],'id',$materials_material_ids);
 
@@ -152,7 +141,6 @@ class Supplier extends MyController {
         foreach ($materials as $key => $material) {
             if(isset($graph_data[$material['id']])){
                 $materials[$key]['graph_data'] = $graph_data[$material['id']];
->>>>>>> Stashed changes
             }
 
         }
