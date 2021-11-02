@@ -10,40 +10,48 @@
 
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-        <div class="row">
-            <div class="col-lg-12">
-                <h1>Guia de Fornecedores</h1>
+
+        <div class="div_to_hide_while_print">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>Guia de Fornecedores</h1>
+                </div>
             </div>
-        </div>
 
-        <div class="row">
-            <div class="col-lg-12">
-                <label>Conheça os fornecedores mais utilizados na sua região</label>
+            <div class="row">
+                <div class="col-lg-12">
+                    <label>Conheça os fornecedores mais utilizados na sua região</label>
+                </div>
             </div>
-        </div>
 
-        <div class="row">
-            <div class="col-lg-12 ">
-                <label class="red_headings">Filtrando por região</label>
-                <hr class="red_bold_line">
+            <div class="row">
+                <div class="col-lg-12 ">
+                    <label class="red_headings">Filtrando por região</label>
+                    <hr class="red_bold_line">
+                </div>
             </div>
-        </div>
 
-        <div class="row">
-            <div class="col-lg-12 ">
-                <p class="black_bold">What's your state</p>
-                <select class="form-control col-sm-4" name="state" id="company_state" disabled>
-                    <?php foreach ($states as $key => $state) {  ?>
-                        <option value="<?=$state['id']?>" <?= ($state['id'] == $selected_state) ? "selected" : ''; ?> > <?=$state['state_name']?> </option>
-                    <?php } ?>
-                </select>
+            <div class="row">
+                <div class="col-lg-12 ">
+                    <p class="black_bold">What's your state</p>
+                    <select class="form-control col-sm-4" name="city" id="company_city" disabled>
+                        <?php foreach ($cities as $key => $city) {  ?>
+                            <option value="<?=$city['id']?>" <?= ($city['id'] == $selected_city_id) ? "selected" : ''; ?> > <?=$city['city_name']?> </option>
+                        <?php } ?>
+                    </select>
+                </div>
             </div>
-        </div>
 
-        <div class="row">
-            <div class="col-lg-12">
+            <div class="row">
+                <div class="col-lg-2">
+                    <button class="btn btn-primary" id="btnPrint" >Export To PDF</button>
+                </div>
+                <div class="col-lg-2">
+                    <button id="printChart" class="btn btn-success">Print Chart</button>
 
-                <button class="btn btn-primary" id="btnPrint" onclick="PrintElem()" >Export To PDF</button>
+                </div>
+                <div class="col-lg-8">
+                </div>
             </div>
         </div>
         <div class="row" id="graph_content">
@@ -87,7 +95,11 @@ window.onload = function () {
     	chart.render();
 
     <?php } ?>
-
+    document.getElementById("printChart").addEventListener("click",function(){
+            $('.div_to_hide_while_print').hide();
+        	    window.print();
+            $('.div_to_hide_while_print').show();
+    });
 
 }
 $('#btnPrint').on('click', function(event) {

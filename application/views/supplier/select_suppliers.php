@@ -25,10 +25,10 @@
 
             <div class="row">
                 <div class="col-lg-12 ">
-                    <p class="black_bold">Estado:</p>
-                    <select class="form-control col-sm-4" name="state" id="company_state" disabled>
-                        <?php foreach ($states as $key => $state) {  ?>
-                            <option value="<?=$state['id']?>" <?= ($state['id'] == $selected_state) ? "selected" : ''; ?> > <?=$state['state_name']?> </option>
+                    <p class="black_bold">City:</p>
+                    <select class="form-control col-sm-4" name="city" id="company_city" disabled>
+                        <?php foreach ($cities as $key => $city) {  ?>
+                            <option value="<?=$city['id']?>" <?= ($city['id'] == $selected_city_id) ? "selected" : ''; ?> > <?=$city['city_name']?> </option>
                         <?php } ?>
                     </select>
                 </div>

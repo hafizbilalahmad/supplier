@@ -70,7 +70,7 @@ class Supplier_model extends CI_Model
             // return $result;
         }
 
-    public function get_graph_data($state_id, $material_ids){
+    public function get_graph_data($city_id, $material_ids){
         // mat.material_name is deleted
 
         $sql = "SELECT
@@ -83,7 +83,7 @@ class Supplier_model extends CI_Model
                     JOIN suppliers sup ON (sup.id = sm.supplier_id)
                     JOIN materials mat ON (mat.id = sm.material_id)
                 WHERE
-                    sm.state_id = ".$state_id."
+                    sm.city_id = ".$city_id."
                     AND
                     sm.material_id IN (".$material_ids.")
                 GROUP BY
