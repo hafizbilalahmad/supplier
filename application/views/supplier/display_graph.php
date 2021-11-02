@@ -33,7 +33,7 @@
 
             <div class="row">
                 <div class="col-lg-12 ">
-                    <p class="black_bold">What's your state</p>
+                    <p class="black_bold">Qual é o seu estado</p>
                     <select class="form-control col-sm-4" name="city" id="company_city" disabled>
                         <?php foreach ($cities as $key => $city) {  ?>
                             <option value="<?=$city['id']?>" <?= ($city['id'] == $selected_city_id) ? "selected" : ''; ?> > <?=$city['city_name']?> </option>
@@ -44,10 +44,10 @@
 
             <div class="row">
                 <div class="col-lg-2">
-                    <button class="btn btn-primary" id="btnPrint" >Export To PDF</button>
+                    <button class="btn btn-primary" id="btnPrint" >Exportar para PDF</button>
                 </div>
                 <div class="col-lg-2">
-                    <button id="printChart" class="btn btn-success">Print Chart</button>
+                    <button id="printChart" class="btn btn-success">Imprimir gráfico</button>
 
                 </div>
                 <div class="col-lg-8">

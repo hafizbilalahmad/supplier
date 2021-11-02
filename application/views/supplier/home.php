@@ -101,7 +101,7 @@
 
                     <div id="company_city_validation" hidden>
                         <br>
-                        <label style="color:red;"> Select a city </label>
+                        <label style="color:red;"> Selecione uma cidade </label>
                     </div>
                 </div><br><br>
                 <div class="col-lg-12 ">
