@@ -98,7 +98,10 @@
                 'material_id':material_id
             },
     		success: function (response) {
-    			alert("success");
+                let state_name = $('#select_states option:selected').text();
+                let supplier_name = $('#select_suppliers option:selected').text();
+                let material_name = $('#select_materials option:selected').text();
+    			alert("Inserted supplier "+supplier_name+" for material "+material_name+" and state "+state_name);
     		},
     		error: function () {
                 alert("fail");

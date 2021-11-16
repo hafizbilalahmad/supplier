@@ -32,10 +32,10 @@
 
             <div class="row">
                 <div class="col-lg-12 ">
-                    <p class="black_bold">Estado:</p>
-                    <select class="form-control col-sm-4" name="state" id="company_state" disabled>
-                        <?php foreach ($states as $key => $state) {  ?>
-                            <option value="<?=$state['id']?>" <?= ($state['id'] == $selected_state) ? "selected" : ''; ?> > <?=$state['state_name']?> </option>
+                    <p class="black_bold">City:</p>
+                    <select class="form-control col-sm-4" name="city" id="company_city" disabled>
+                        <?php foreach ($cities as $key => $city) {  ?>
+                            <option value="<?=$city['id']?>" <?= ($city['id'] == $selected_city_id) ? "selected" : ''; ?> > <?=$city['city_name']?> </option>
                         <?php } ?>
                     </select>
                 </div>
@@ -51,17 +51,19 @@
                     <hr class="red_bold_line">
                 </div>
             </div>
-			
-			
+
+
             <div class="row" id="supplier_row">
                 <?php foreach ($materials as $key => $material) {?>
                     <div class="col-lg-4 col-md-4 col-sm-4" style="margin-bottom:2%;">
                         <label class="black_bold"> <?=$material['material_name'] ?></label>
                         <select class="form-control col-10 supplier_class[]" name="<?= 'suppliers['.$material['id'].']' ?>">
-                            <option value="" selected>Fornecedor</option>
-                        <?php foreach ($suppliers as $key => $supplier): ?>
+                            <option value="" selected><?=$material['material_name'] ?> Fornecedor</option>
+                            <?php if(isset($material['suppliers'])) {?>
+                        <?php foreach ($material['suppliers'] as $supplier_key => $supplier): ?>
                                 <option value="<?= $supplier['id'] ?>"> <?= $supplier['name'] ?> </option>
                         <?php endforeach; ?>
+                    <?php } ?>
                         </select>
                         <br>
                         <input type="text" name="<?='other_unlisted['.$material['id'].']'?>" class="form-control col-10 other_unlisted" value="" placeholder="another unlisted">
@@ -108,10 +110,6 @@
         var button = document.getElementById('add_state_material_supplier_btn');
         button.form.submit();
     }
-    // $('#add_supplier_form').submit(function(e) {
-    //     $(':disabled').each(function(e) {
-    //         $(this).removeAttr('disabled');
-    //     })
-    // });
+
 
 </script>

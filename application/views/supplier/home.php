@@ -41,11 +41,8 @@
                     <input type="number" id="num_of_employess" name="num_of_employess" class="form-control col-sm-6" value="1">
                     <div id="num_of_employess_validation" hidden>
                         <br>
-<<<<<<< Updated upstream
-                        <label style="color:red;"> Please enter valid number of employees </label>
-=======
-                        <label style="color:red;"> <?=$this->lang->line("msg_number_of_employees_error")?> </label>
->>>>>>> Stashed changes
+                        <label style="color:red;"> Por favor, insira um número válido de funcionários </label>
+
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
@@ -87,10 +84,10 @@
             </div>
 
             <div class="row">
-                <div class="col-lg-12 ">
-                    <p class="black_bold"><?=$this->lang->line("msg_state")?></p>
-                    <select class="form-control col-sm-4" name="state" id="company_state">
-                        <option value="" disabled selected> <?=$this->lang->line("msg_select_state")?> </option>
+                <div class="col-lg-6 ">
+                    <p class="black_bold">Estado</p>
+                    <select class="form-control col-sm-6" name="state" id="company_state" onchange="get_cities(this.value);">
+                        <option value="" disabled selected> Selecionar Estado </option>
                         <?php foreach ($states as $key => $state) {  ?>
                             <option value="<?=$state['id']?>"> <?=$state['state_name']?> </option>
                         <?php } ?>
@@ -99,6 +96,24 @@
                     <div id="company_state_validation" hidden>
                         <br>
                         <label style="color:red;"> <?=$this->lang->line("msg_state_select_error")?> </label>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 ">
+                    <p class="black_bold">Cities</p>
+
+                    <div onclick="select_state_validation()" id="company_city_div">
+                        <select class="form-control col-sm-6" name="city" id="company_city" disabled >
+                            <option value="" disabled selected> Select City </option>
+                            <!-- <?php foreach ($cities as $key => $city) {  ?> -->
+                            <!-- <option value="<?=$city['id']?>"> <?=$city['city_name']?> </option> -->
+                            <!-- <?php } ?> -->
+                        </select>
+                    </div>
+
+                    <div id="company_city_validation" hidden>
+                        <br>
+                        <label style="color:red;"> Selecione uma cidade </label>
                     </div>
                 </div><br><br>
                 <div class="col-lg-12 ">
@@ -142,6 +157,15 @@ function validate_and_submit(){
         $('#company_state_validation').hide();
     }
 
+    let company_city = $('#company_city').val();
+    if(!company_city){
+        $('#company_city_validation').removeAttr('hidden');
+        $('#company_city_validation').show();
+        check = 1;
+    }else{
+        $('#company_city_validation').hide();
+    }
+
     if(check){
         return;
     }
@@ -150,12 +174,45 @@ function validate_and_submit(){
 
 
 }
-
+function select_state_validation(){
+    alert("Please select a state fist");
+}
 function is_valid_employees(){
     let num_of_employess = $('#num_of_employess').val();
     if(parseInt(num_of_employess) < 1 || !Number.isInteger(parseInt(num_of_employess))){
         return false;
     }
     return true;
+}
+
+function get_cities(state_id){
+    let api_url = $('#my_site_url').val() + '/supplier/get_cities';
+    $.ajax({
+        type: "post",
+        url: api_url,
+        data:{
+            'state_id':state_id
+        },
+        success: function (response) {
+            var cities = $.parseJSON(response);
+            $('#company_city').removeAttr('disabled');
+            $('#company_city_div').prop("onclick", null).off("click");
+            $('#company_city').html('');
+
+            let state_name = $('#company_state option:selected').text();
+
+            selOpts = "<option value='' selected disabled>Select "+state_name+" City</option>";
+            for (i=0;i<cities.length;i++)
+            {
+                var id = cities[i]['id'];
+                var name = cities[i]['city_name'];
+                selOpts += "<option value='"+id+"'>"+name+"</option>";
+            }
+            $('#company_city').append(selOpts);
+        },
+        error: function () {
+            alert("fail");
+        }
+    });
 }
 </script>
