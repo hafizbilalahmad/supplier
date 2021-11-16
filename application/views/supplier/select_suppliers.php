@@ -1,16 +1,23 @@
 <?php $this->load->view('common/header.php'); ?>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<script type="text/javascript">
+// function googleTranslateElementInit() {
+//   new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+// }
+</script>
+<div id="google_translate_element"></div>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-12">
         <input type="hidden" id="hidden_supplier_count" value="<?=$materials_count?>" />
         <div class="row">
             <div class="col-lg-12">
-                <h1>Guia de Fornecedores</h1>
+                <h1><?=$this->lang->line("msg_main_heading")?></h1>
             </div>
         </div>
 
         <div class="row">
             <div class="col-lg-12">
-                <label>Conheça os fornecedores mais utilizados na sua região</label>
+                <label><?=$this->lang->line("msg_label_under_main_heading")?></label>
             </div>
         </div>
 

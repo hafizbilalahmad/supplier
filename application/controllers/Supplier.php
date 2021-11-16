@@ -10,6 +10,8 @@ class Supplier extends MyController {
     }
 
     public function index(){
+        // $data["language_msg"] = ;
+        // show($data);
         $segments = $this->supplier_model->get_selected_value('id,segment_name,segment_key','segments',['is_deleted' => 0]);
         $states = $this->supplier_model->get_selected_value('id,state_name,state_key','states',['is_deleted' => 0]);
         $cities = $this->supplier_model->get_selected_value('id,city_name,city_key','cities',['is_deleted' => 0]);
