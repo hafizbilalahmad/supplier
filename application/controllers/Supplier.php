@@ -151,7 +151,12 @@ class Supplier extends MyController {
     }
 
     private function insert_new_supplier($new_supplier_data){
-        $supplier_insert_id = $this->supplier_model->insert_value('suppliers',$new_supplier_data);
+        $already_exist = $this->supplier_model->get_value('suppliers',['name' => $new_supplier_data['name']]);
+        if(!$already_exist){
+            $supplier_insert_id = $this->supplier_model->insert_value('suppliers',$new_supplier_data);
+        }else{
+            $supplier_insert_id = $already_exist[0]['id'];
+        }
         return $supplier_insert_id;
     }
 
